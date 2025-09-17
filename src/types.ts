@@ -5,7 +5,7 @@ export interface SummarizeRequest {
 
 export interface SummarizeResponse {
   url: string;
-  contentType: "html" | "text" | "pdf";
+  contentType: 'html' | 'text';
   summary: string;
   originalLength: number;
   summaryLength: number;

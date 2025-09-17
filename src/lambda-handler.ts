@@ -1,34 +1,34 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { UrlSummarizer } from "./url-summarizer";
-import { SummarizeRequest } from "./types";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { UrlSummarizer } from './url-summarizer';
+import { SummarizeRequest } from './types';
 
 const summarizer = new UrlSummarizer();
 
 export const handler = async (
-  event: APIGatewayProxyEvent,
+  event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 
   try {
     // Handle CORS preflight
-    if (event.httpMethod === "OPTIONS") {
+    if (event.httpMethod === 'OPTIONS') {
       return {
         statusCode: 200,
         headers,
-        body: "",
+        body: '',
       };
     }
 
-    if (event.httpMethod !== "POST") {
+    if (event.httpMethod !== 'POST') {
       return {
         statusCode: 405,
         headers,
-        body: JSON.stringify({ error: "Method not allowed" }),
+        body: JSON.stringify({ error: 'Method not allowed' }),
       };
     }
 
@@ -36,7 +36,7 @@ export const handler = async (
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "Request body is required" }),
+        body: JSON.stringify({ error: 'Request body is required' }),
       };
     }
 
@@ -46,7 +46,7 @@ export const handler = async (
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "URL is required" }),
+        body: JSON.stringify({ error: 'URL is required' }),
       };
     }
 
@@ -57,7 +57,7 @@ export const handler = async (
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "Invalid URL format" }),
+        body: JSON.stringify({ error: 'Invalid URL format' }),
       };
     }
 
@@ -69,14 +69,14 @@ export const handler = async (
       body: JSON.stringify(result),
     };
   } catch (error) {
-    console.error("Lambda handler error:", error);
+    console.error('Lambda handler error:', error);
 
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: "Internal server error",
-        message: error instanceof Error ? error.message : "Unknown error",
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error',
       }),
     };
   }

@@ -51,24 +51,9 @@ export class UrlSummarizerStack extends cdk.Stack {
           LAMBDA_VERSION: '1.1',
         },
         bundling: {
-          externalModules: ['@aws-sdk/*', 'canvas'],
+          externalModules: ['@aws-sdk/*'],
           minify: true,
           sourceMap: false,
-          commandHooks: {
-            beforeBundling(inputDir: string, outputDir: string): string[] {
-              return [];
-            },
-            beforeInstall(inputDir: string, outputDir: string): string[] {
-              return [];
-            },
-            afterBundling(inputDir: string, outputDir: string): string[] {
-              return [
-                'find /asset-output -name "test" -type d -exec rm -rf {} + || true',
-                'find /asset-output -name "*.test.*" -delete || true',
-                'find /asset-output -name "*.spec.*" -delete || true',
-              ];
-            },
-          },
         },
       }
     );

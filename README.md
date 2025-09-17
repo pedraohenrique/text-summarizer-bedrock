@@ -1,10 +1,10 @@
 # URL Content Summarizer
 
-A serverless service that fetches content from URLs and generates summaries using AWS Bedrock. Supports HTML, plain text, and PDF content.
+A serverless service that fetches content from URLs and generates summaries using AWS Bedrock. Supports HTML and plain text content.
 
 ## Features
 
-- **Multi-format support**: HTML, plain text, and PDF content extraction
+- **Multi-format support**: HTML and plain text content extraction
 - **AI-powered summarization**: Uses Claude 3 Haiku via AWS Bedrock for cost-effective summarization
 - **Serverless architecture**: Built with AWS Lambda and API Gateway
 - **Infrastructure as Code**: Deployed using AWS CDK
@@ -55,10 +55,10 @@ A serverless service that fetches content from URLs and generates summaries usin
 Send a POST request to the `/summarize` endpoint:
 
 ```bash
-curl -X POST https://your-api-gateway-url/summarize \
+curl -X POST https://5ybw46rra1.execute-api.us-east-1.amazonaws.com/prod/summarize \
   -H "Content-Type: application/json" \
   -d '{
-    "url": "https://example.com/article",
+    "url": "https://stream.mux.com/leDBzf8G57ZVfFiybfyAv901A02GdrZiE49IR58sDbeVY/text/01rgk01uWtYy102Hs1erUnyf01uWkbV01iXAlUYSwsLerPhGuV8aCZ1QSrQ.txt",
     "maxLength": 500
   }'
 ```
@@ -96,7 +96,6 @@ npm run dev
 
 - **HTML** (`text/html`): Extracts main content, removes navigation and styling
 - **Plain Text** (`text/plain`): Processes text content directly
-- **PDF** (`application/pdf`): Extracts text from PDF documents
 
 ## Cost Optimization
 
